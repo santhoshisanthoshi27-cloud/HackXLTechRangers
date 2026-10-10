@@ -49,12 +49,53 @@ NECTO provides a centralized, intelligent ecosystem that simplifies creator mark
 
 | Domain | Technology / Tools | Purpose |
 | :--- | :--- | :--- |
-| **Frontend** | React, TypeScript, Tailwind CSS | Modern, responsive, type-safe web application |
+| **Frontend** | React, TypeScript, Vite, Tailwind CSS | Modern, responsive, type-safe web application |
 | **Backend** | Java, Spring Boot | Enterprise-grade RESTful APIs, authentication, and marketplace services |
 | **Database** | PostgreSQL | Relational schema, transactional integrity, and data migrations |
 | **AI / ML** | Python | Creator recommendation engine (rule-based matcher for v1, ML ranking in later phases) |
-| **API Architecture** | REST APIs | Standardized JSON communication between client, backend, and AI service |
-| **Version Control** | Git | Distributed version control and collaboration |
+| **Deployment** | Firebase Hosting | Hosting for the static Vite frontend assets |
+
+---
+
+## 🚀 Getting Started & Setup
+
+### Prerequisites
+Make sure you have the following installed on your machine:
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- Java 17+ & Maven (For backend)
+- Python 3.9+ (For AI/ML services)
+- PostgreSQL (For the database)
+
+### Running the Frontend Locally
+
+1. **Navigate to the frontend directory:**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables:**
+   Copy the example environment file and configure your local variables.
+   ```bash
+   cp .env.example .env
+   ```
+   *(Update `VITE_API_BASE_URL` if your backend is running on a different port than `8000`)*
+
+4. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:5173`.
+
+### Deployment (Frontend)
+The frontend is configured to be deployed to **Firebase Hosting**.
+1. Build the production assets: `npm run build`
+2. Authenticate the CLI: `npx firebase-tools login`
+3. Deploy: `npx firebase-tools deploy --only hosting`
 
 ---
 
@@ -63,65 +104,47 @@ NECTO provides a centralized, intelligent ecosystem that simplifies creator mark
 ```text
 NECTO/
 ├── frontend/       # React, TypeScript, and Tailwind CSS user interface
-├── backend/        # Java Spring Boot REST APIs, authentication, business logic, and marketplace services
+├── backend/        # Java Spring Boot REST APIs, authentication, and marketplace services
 ├── ai-ml/          # AI-based creator recommendations, campaign matching, and ranking
-├── database/       # PostgreSQL database design, schema, and migrations
+├── database/       # PostgreSQL database schema and migrations
 ├── tests/          # Frontend, backend, API, and AI matching tests
-├── docs/           # Project documentation, architecture, API specifications, and setup guides
+├── docs/           # Project documentation, architecture, API specifications
 ├── README.md       # Root project documentation and overview
 └── .gitignore      # Root Git ignore rules
 ```
 
-### Folder Descriptions
+---
 
-- **`frontend/`** — Contains the client-side user interface built with React, TypeScript, and Tailwind CSS.
-- **`backend/`** — Houses the server-side architecture built with Java and Spring Boot, managing authentication (JWT/OAuth2), business workflows, campaign lifecycle, and data persistence.
-- **`ai-ml/`** — Contains the matching and ranking services written in Python, responsible for calculating creator-campaign compatibility scores.
-- **`database/`** — Contains relational database designs, entity relationship diagrams (ERDs), SQL DDL scripts, seed data, and schema migration files.
-- **`tests/`** — Centralized test suites covering end-to-end (E2E) flows, cross-service integration tests, and performance benchmark suites.
-- **`docs/`** — Architecture decision records (ADRs), API contract specifications (OpenAPI/Swagger), system sequence diagrams, and developer onboarding guides.
+## 📋 Core Features
+
+- [x] **Frontend Architecture Setup:** Vite + React + TypeScript + Tailwind.
+- [x] **Global State Management:** Context API implemented for App Data and Authentication.
+- [ ] **Business and Creator Registration:** Role-based onboarding and secure authentication.
+- [ ] **User Profile Management:** Rich profiles for businesses and creators.
+- [ ] **Campaign Creation:** Wizard for defining deliverables, niches, deadlines, and budgets.
+- [ ] **AI-Powered Creator Matching:** Intelligent recommendation engine based on niche, budget, and metrics.
+- [ ] **Collaboration Management:** In-platform application flow, negotiation, and deliverable tracking.
 
 ---
 
-## 📋 Planned Core Features
+## 🗺️ Development Roadmap
 
-> *Note: All features listed below are currently planned and slated for implementation in upcoming development phases.*
-
-- [ ] **1. Business and Creator Registration:** Role-based onboarding and secure authentication for businesses and creators.
-- [ ] **2. User Profile Management:** Rich profiles for businesses (brand information, industry) and creators (social links, audience demographics, content niches, portfolio).
-- [ ] **3. Campaign Creation:** Comprehensive campaign wizard for business owners to define deliverables, target niches, deadlines, and budgets.
-- [ ] **4. Creator Discovery and Search:** Filterable catalog allowing brands to search creators by category, follower range, platform, and location.
-- [ ] **5. AI-Powered Creator Matching:** Intelligent recommendation engine matching campaigns to creators based on niche alignment, platform requirements, budget compatibility, engagement metrics, and creator availability.
-- [ ] **6. Campaign Applications and Collaboration Management:** In-platform application flow, offer negotiation, contract status tracking, and deliverable review cycles.
-- [ ] **7. Multi-Platform Promotion Support:** Dedicated workflows and metrics for Instagram, YouTube, Facebook, and LinkedIn.
-- [ ] **8. Notifications and Status Tracking:** Real-time event notifications for application updates, milestone completions, and chat/campaign statuses.
-- [ ] **9. Reviews and Performance Analytics:** Post-campaign reviews, creator ratings, and campaign ROI/engagement performance analytics.
-
----
-
-## 🗺️ Future Development Roadmap
-
-### Phase 1: Foundation & Architecture Setup
-- Initialize Git repository and establish branching strategy.
-- Set up PostgreSQL database schema and migration tools (Flyway / Liquibase).
-- Initialize Spring Boot backend boilerplate with authentication and user domain models.
-- Initialize React + TypeScript + Tailwind CSS frontend boilerplate with basic layouts and routing.
-- Set up initial Python rule-based matching script and API contracts.
+### Phase 1: Foundation & Architecture Setup (Current)
+- [x] Initialize Git repository.
+- [x] Initialize React + TypeScript + Tailwind CSS frontend boilerplate with basic layouts and state.
+- [ ] Set up PostgreSQL database schema and migration tools.
+- [ ] Initialize Spring Boot backend boilerplate with authentication.
+- [ ] Set up initial Python rule-based matching script and API contracts.
 
 ### Phase 2: Core Platform MVP
-- Implement user registration, login, and profile management for businesses and creators.
+- Implement user registration, login, and profile management.
 - Build campaign creation and listing modules.
-- Implement search and filtering for creators and campaigns.
-- Connect the rule-based matching engine to suggest creators for new campaigns.
+- Implement search and filtering.
+- Connect the rule-based matching engine.
 
 ### Phase 3: Collaboration & Workflow Management
-- Implement application submission and review workflow.
-- Deliverable submission and status tracking pipeline.
-- Notification system for collaboration events.
-- Platform-specific deliverable verification (Instagram, YouTube, Facebook, LinkedIn).
+- Implement application submission, deliverable tracking, and notification systems.
 
 ### Phase 4: Advanced AI, Analytics & Scaling
-- Upgrade matching engine from rule-based scoring to ML-based collaborative and content-based recommendation models.
+- Upgrade matching engine to ML-based models.
 - Deep social analytics integration and performance tracking.
-- Feedback, ratings, and reputation scoring system.
-- Comprehensive end-to-end testing, security audits, and production deployment.
